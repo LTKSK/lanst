@@ -7,8 +7,8 @@ frontend/
 ├── public/
 │   └── vite.svg
 ├── src/
-│   ├── vocabulary/
-│   │   ├── components/
+│   ├── routes/
+│   │   ├── vocabulary/
 │   │   │   ├── VocabularyList.tsx
 │   │   │   └── VocabularyForm.tsx
 │   │   ├── hooks/
@@ -34,9 +34,10 @@ frontend/
 ## 説明
 
 - **public/**: 静的アセットを含みます。`vite.svg`はその一例です。
-- **src/**: アプリケーションのメインソースディレクトリです。
-  - **vocabulary/**: 語彙機能に関連するすべてのファイルを含みます。
-    - **components/**: 語彙機能のためのReactコンポーネントです。`VocabularyList.tsx`は保存された語彙のリストを表示し、`VocabularyForm.tsx`は新しい語彙項目の入力を処理します。
+- **src/**: アプリケーションのメインソースディレクトリです。TanStack RouterのFile Based Routingに対応するため、`routes`ディレクトリを使用します。
+  - **routes/vocabulary/**: 語彙機能に関連するすべてのファイルを含みます。
+    - **VocabularyList.tsx**: 保存された語彙のリストを表示します。
+    - **VocabularyForm.tsx**: 新しい語彙項目の入力を処理します。
     - **hooks/**: 語彙機能のためのカスタムReactフックです。`useVocabulary.ts`は語彙項目に関連する状態とロジックを管理します。
     - **services/**: 語彙機能に関連するAPIインタラクションのためのサービスファイルです。`mockApi.ts`は語彙管理のためのAPI呼び出しをシミュレートします。
   - **App.tsx**: メインアプリケーションコンポーネントです。

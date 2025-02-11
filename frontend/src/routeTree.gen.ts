@@ -11,14 +11,24 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as VocablaryImport } from './routes/vocablary'
+import { Route as TestImport } from './routes/test'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
-import { Route as VocabularyServicesMockApiImport } from './routes/vocabulary/services/mockApi'
-import { Route as VocabularyHooksUseVocabularyImport } from './routes/vocabulary/hooks/useVocabulary'
-import { Route as VocabularyComponentsVocabularyListImport } from './routes/vocabulary/components/VocabularyList'
-import { Route as VocabularyComponentsVocabularyFormImport } from './routes/vocabulary/components/VocabularyForm'
 
 // Create/Update Routes
+
+const VocablaryRoute = VocablaryImport.update({
+  id: '/vocablary',
+  path: '/vocablary',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TestRoute = TestImport.update({
+  id: '/test',
+  path: '/test',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -31,33 +41,6 @@ const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
-
-const VocabularyServicesMockApiRoute = VocabularyServicesMockApiImport.update({
-  id: '/vocabulary/services/mockApi',
-  path: '/vocabulary/services/mockApi',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const VocabularyHooksUseVocabularyRoute =
-  VocabularyHooksUseVocabularyImport.update({
-    id: '/vocabulary/hooks/useVocabulary',
-    path: '/vocabulary/hooks/useVocabulary',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const VocabularyComponentsVocabularyListRoute =
-  VocabularyComponentsVocabularyListImport.update({
-    id: '/vocabulary/components/VocabularyList',
-    path: '/vocabulary/components/VocabularyList',
-    getParentRoute: () => rootRoute,
-  } as any)
-
-const VocabularyComponentsVocabularyFormRoute =
-  VocabularyComponentsVocabularyFormImport.update({
-    id: '/vocabulary/components/VocabularyForm',
-    path: '/vocabulary/components/VocabularyForm',
-    getParentRoute: () => rootRoute,
-  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -77,32 +60,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
-    '/vocabulary/components/VocabularyForm': {
-      id: '/vocabulary/components/VocabularyForm'
-      path: '/vocabulary/components/VocabularyForm'
-      fullPath: '/vocabulary/components/VocabularyForm'
-      preLoaderRoute: typeof VocabularyComponentsVocabularyFormImport
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestImport
       parentRoute: typeof rootRoute
     }
-    '/vocabulary/components/VocabularyList': {
-      id: '/vocabulary/components/VocabularyList'
-      path: '/vocabulary/components/VocabularyList'
-      fullPath: '/vocabulary/components/VocabularyList'
-      preLoaderRoute: typeof VocabularyComponentsVocabularyListImport
-      parentRoute: typeof rootRoute
-    }
-    '/vocabulary/hooks/useVocabulary': {
-      id: '/vocabulary/hooks/useVocabulary'
-      path: '/vocabulary/hooks/useVocabulary'
-      fullPath: '/vocabulary/hooks/useVocabulary'
-      preLoaderRoute: typeof VocabularyHooksUseVocabularyImport
-      parentRoute: typeof rootRoute
-    }
-    '/vocabulary/services/mockApi': {
-      id: '/vocabulary/services/mockApi'
-      path: '/vocabulary/services/mockApi'
-      fullPath: '/vocabulary/services/mockApi'
-      preLoaderRoute: typeof VocabularyServicesMockApiImport
+    '/vocablary': {
+      id: '/vocablary'
+      path: '/vocablary'
+      fullPath: '/vocablary'
+      preLoaderRoute: typeof VocablaryImport
       parentRoute: typeof rootRoute
     }
   }
@@ -113,77 +82,46 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/vocabulary/components/VocabularyForm': typeof VocabularyComponentsVocabularyFormRoute
-  '/vocabulary/components/VocabularyList': typeof VocabularyComponentsVocabularyListRoute
-  '/vocabulary/hooks/useVocabulary': typeof VocabularyHooksUseVocabularyRoute
-  '/vocabulary/services/mockApi': typeof VocabularyServicesMockApiRoute
+  '/test': typeof TestRoute
+  '/vocablary': typeof VocablaryRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/vocabulary/components/VocabularyForm': typeof VocabularyComponentsVocabularyFormRoute
-  '/vocabulary/components/VocabularyList': typeof VocabularyComponentsVocabularyListRoute
-  '/vocabulary/hooks/useVocabulary': typeof VocabularyHooksUseVocabularyRoute
-  '/vocabulary/services/mockApi': typeof VocabularyServicesMockApiRoute
+  '/test': typeof TestRoute
+  '/vocablary': typeof VocablaryRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/vocabulary/components/VocabularyForm': typeof VocabularyComponentsVocabularyFormRoute
-  '/vocabulary/components/VocabularyList': typeof VocabularyComponentsVocabularyListRoute
-  '/vocabulary/hooks/useVocabulary': typeof VocabularyHooksUseVocabularyRoute
-  '/vocabulary/services/mockApi': typeof VocabularyServicesMockApiRoute
+  '/test': typeof TestRoute
+  '/vocablary': typeof VocablaryRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/vocabulary/components/VocabularyForm'
-    | '/vocabulary/components/VocabularyList'
-    | '/vocabulary/hooks/useVocabulary'
-    | '/vocabulary/services/mockApi'
+  fullPaths: '/' | '/about' | '/test' | '/vocablary'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/vocabulary/components/VocabularyForm'
-    | '/vocabulary/components/VocabularyList'
-    | '/vocabulary/hooks/useVocabulary'
-    | '/vocabulary/services/mockApi'
-  id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/vocabulary/components/VocabularyForm'
-    | '/vocabulary/components/VocabularyList'
-    | '/vocabulary/hooks/useVocabulary'
-    | '/vocabulary/services/mockApi'
+  to: '/' | '/about' | '/test' | '/vocablary'
+  id: '__root__' | '/' | '/about' | '/test' | '/vocablary'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  VocabularyComponentsVocabularyFormRoute: typeof VocabularyComponentsVocabularyFormRoute
-  VocabularyComponentsVocabularyListRoute: typeof VocabularyComponentsVocabularyListRoute
-  VocabularyHooksUseVocabularyRoute: typeof VocabularyHooksUseVocabularyRoute
-  VocabularyServicesMockApiRoute: typeof VocabularyServicesMockApiRoute
+  TestRoute: typeof TestRoute
+  VocablaryRoute: typeof VocablaryRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  VocabularyComponentsVocabularyFormRoute:
-    VocabularyComponentsVocabularyFormRoute,
-  VocabularyComponentsVocabularyListRoute:
-    VocabularyComponentsVocabularyListRoute,
-  VocabularyHooksUseVocabularyRoute: VocabularyHooksUseVocabularyRoute,
-  VocabularyServicesMockApiRoute: VocabularyServicesMockApiRoute,
+  TestRoute: TestRoute,
+  VocablaryRoute: VocablaryRoute,
 }
 
 export const routeTree = rootRoute
@@ -198,10 +136,8 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/about",
-        "/vocabulary/components/VocabularyForm",
-        "/vocabulary/components/VocabularyList",
-        "/vocabulary/hooks/useVocabulary",
-        "/vocabulary/services/mockApi"
+        "/test",
+        "/vocablary"
       ]
     },
     "/": {
@@ -210,17 +146,11 @@ export const routeTree = rootRoute
     "/about": {
       "filePath": "about.tsx"
     },
-    "/vocabulary/components/VocabularyForm": {
-      "filePath": "vocabulary/components/VocabularyForm.tsx"
+    "/test": {
+      "filePath": "test.tsx"
     },
-    "/vocabulary/components/VocabularyList": {
-      "filePath": "vocabulary/components/VocabularyList.tsx"
-    },
-    "/vocabulary/hooks/useVocabulary": {
-      "filePath": "vocabulary/hooks/useVocabulary.ts"
-    },
-    "/vocabulary/services/mockApi": {
-      "filePath": "vocabulary/services/mockApi.ts"
+    "/vocablary": {
+      "filePath": "vocablary.tsx"
     }
   }
 }
