@@ -4,8 +4,9 @@ export type Vocabulary = {
   definition: string;
 };
 
-export function fetchVocablaries() {
-  new Promise((resolve, reject) =>
+export function fetchVocablaries(): Promise<Vocabulary[]> {
+  console.log("fetchVocablaries");
+  return new Promise((resolve, reject) =>
     setTimeout(() => {
       if (Math.random() < 0.3) {
         reject(new Error("Failed to fetch vocablaries"));

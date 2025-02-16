@@ -1,15 +1,17 @@
-import type { Vocabulary } from "./api";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { fetchVocablaries } from "./api";
 
-type Props = {
-  vocablaries: Vocabulary[];
-};
+export const Component = () => {
+  const { data } = useSuspenseQuery({
+    queryKey: ["vocablaries"],
+    queryFn: fetchVocablaries,
+  });
 
-export const VocabularyList = ({ vocablaries }: Props) => {
   return (
     <div>
       <h1 className="text-3xl font-bold underline">Vocabulary List</h1>
       <ul>
-        {vocablaries.map((item) => (
+        {data.map((item) => (
           <li key={item.id}>{item.word}</li>
         ))}
       </ul>
@@ -21,5 +23,11 @@ export const ErrorBoundary = () => {
   return <div>Error</div>;
 };
 export const Loading = () => {
-  return <div>Loading</div>;
+  return <div>Loading Vocablaries...</div>;
+};
+
+export const VocabularyList = {
+  Component: Component,
+  Error: ErrorBoundary,
+  Loading: Loading,
 };
