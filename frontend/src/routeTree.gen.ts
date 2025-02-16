@@ -11,18 +11,12 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as VocablaryImport } from './routes/vocablary'
 import { Route as TestImport } from './routes/test'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
+import { Route as VocablaryIndexImport } from './routes/vocablary/index'
 
 // Create/Update Routes
-
-const VocablaryRoute = VocablaryImport.update({
-  id: '/vocablary',
-  path: '/vocablary',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const TestRoute = TestImport.update({
   id: '/test',
@@ -39,6 +33,12 @@ const AboutRoute = AboutImport.update({
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const VocablaryIndexRoute = VocablaryIndexImport.update({
+  id: '/vocablary/',
+  path: '/vocablary/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,11 +67,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TestImport
       parentRoute: typeof rootRoute
     }
-    '/vocablary': {
-      id: '/vocablary'
+    '/vocablary/': {
+      id: '/vocablary/'
       path: '/vocablary'
       fullPath: '/vocablary'
-      preLoaderRoute: typeof VocablaryImport
+      preLoaderRoute: typeof VocablaryIndexImport
       parentRoute: typeof rootRoute
     }
   }
@@ -83,14 +83,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/test': typeof TestRoute
-  '/vocablary': typeof VocablaryRoute
+  '/vocablary': typeof VocablaryIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/test': typeof TestRoute
-  '/vocablary': typeof VocablaryRoute
+  '/vocablary': typeof VocablaryIndexRoute
 }
 
 export interface FileRoutesById {
@@ -98,7 +98,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/test': typeof TestRoute
-  '/vocablary': typeof VocablaryRoute
+  '/vocablary/': typeof VocablaryIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -106,7 +106,7 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/about' | '/test' | '/vocablary'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/about' | '/test' | '/vocablary'
-  id: '__root__' | '/' | '/about' | '/test' | '/vocablary'
+  id: '__root__' | '/' | '/about' | '/test' | '/vocablary/'
   fileRoutesById: FileRoutesById
 }
 
@@ -114,14 +114,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   TestRoute: typeof TestRoute
-  VocablaryRoute: typeof VocablaryRoute
+  VocablaryIndexRoute: typeof VocablaryIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   TestRoute: TestRoute,
-  VocablaryRoute: VocablaryRoute,
+  VocablaryIndexRoute: VocablaryIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -137,7 +137,7 @@ export const routeTree = rootRoute
         "/",
         "/about",
         "/test",
-        "/vocablary"
+        "/vocablary/"
       ]
     },
     "/": {
@@ -149,8 +149,8 @@ export const routeTree = rootRoute
     "/test": {
       "filePath": "test.tsx"
     },
-    "/vocablary": {
-      "filePath": "vocablary.tsx"
+    "/vocablary/": {
+      "filePath": "vocablary/index.tsx"
     }
   }
 }

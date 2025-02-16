@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { VocabularyList } from "./-components/vocablary/VocabularyList";
 
 type Vocabulary = {
   word: string;
   definition: string;
 };
 
-export const Route = createFileRoute("/vocablary")({
+export const Route = createFileRoute("/vocablary/")({
   component: Vocabulary,
   loader: () =>
     new Promise((resolve) =>
@@ -21,5 +22,5 @@ export const Route = createFileRoute("/vocablary")({
 
 function Vocabulary(vocablary: Vocabulary) {
   console.log("vocablary", vocablary);
-  return <div>Hello "vocabulary"!</div>;
+  return <VocabularyList />;
 }
