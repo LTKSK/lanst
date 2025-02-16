@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VocabularyList } from "./-components/vocablary/VocabularyList";
+import { VocabularyForm } from "./-components/vocablary/VocabularyForm";
 
 export const Route = createFileRoute("/vocablary/")({
   component: Vocabulary,
@@ -8,5 +9,10 @@ export const Route = createFileRoute("/vocablary/")({
 });
 
 function Vocabulary() {
-  return <VocabularyList.Component />;
+  return (
+    <div>
+      <VocabularyList.Component />
+      <VocabularyForm />
+    </div>
+  );
 }
