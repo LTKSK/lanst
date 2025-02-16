@@ -1,26 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { VocabularyList } from "./-components/vocablary/VocabularyList";
 
-type Vocabulary = {
-  word: string;
-  definition: string;
-};
+const mockVocabulary = [
+  { id: 1, word: "Word 1", definition: "aaa" },
+  { id: 2, word: "Word 2", definition: "aaa" },
+  { id: 3, word: "Word 3", definition: "aaa" },
+];
 
 export const Route = createFileRoute("/vocablary/")({
   component: Vocabulary,
-  loader: () =>
-    new Promise((resolve) =>
-      setTimeout(() => {
-        const vocablary: Vocabulary = {
-          word: "vocabulary",
-          definition: "the body of words used in a particular language.",
-        };
-        resolve(vocablary);
-      }, 1000)
-    ),
 });
 
-function Vocabulary(vocablary: Vocabulary) {
-  console.log("vocablary", vocablary);
-  return <VocabularyList />;
+function Vocabulary() {
+  return <VocabularyList vocablaries={mockVocabulary} />;
 }
