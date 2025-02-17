@@ -12,7 +12,7 @@ export const VocabularyForm = () => {
           type="text"
           id="word"
           name="word"
-          className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <div className="flex flex-col">
@@ -25,7 +25,7 @@ export const VocabularyForm = () => {
         <textarea
           id="definition"
           name="definition"
-          className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
       </div>
       <button
