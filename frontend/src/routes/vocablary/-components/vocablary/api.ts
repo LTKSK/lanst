@@ -22,7 +22,7 @@ const vocablaries: Vocabulary[] = [
   },
 ];
 
-export function fetchVocablaries(): Promise<Vocabulary[]> {
+export async function fetchVocablaries(): Promise<Vocabulary[]> {
   return new Promise((resolve, reject) =>
     setTimeout(() => {
       if (Math.random() < 0.3) {
@@ -32,4 +32,13 @@ export function fetchVocablaries(): Promise<Vocabulary[]> {
       resolve(vocablaries);
     }, 2000)
   );
+}
+
+export async function addVocablary(
+  vocablary: Omit<Vocabulary, "id">
+): Promise<void> {
+  vocablaries.push({
+    id: vocablaries.length + 1,
+    ...vocablary,
+  });
 }
