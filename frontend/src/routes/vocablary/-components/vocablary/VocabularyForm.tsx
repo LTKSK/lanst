@@ -7,14 +7,17 @@ export const VocabularyForm = () => {
 
   const handleWordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWord(event.target.value);
-  }
-  const handleDefinitionChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  };
+  const handleDefinitionChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
     setDefinition(event.target.value);
-
+  };
   const handleCreate = (event: React.FormEvent) => {
     event.preventDefault();
     addVocablary({ word, definition });
   };
+
   return (
     <form className="grid grid-cols-1 gap-4 p-4 bg-white shadow-md rounded-md">
       <div className="flex flex-col">
