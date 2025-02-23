@@ -1,20 +1,17 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery, useQuery } from "@tanstack/react-query";
 import { fetchVocablaries } from "./api";
 
 export const Component = () => {
-  const { data } = useSuspenseQuery({
+  const { data, isError, isPending } = useQuery({
     queryKey: ["vocablaries"],
     queryFn: fetchVocablaries,
   });
+  console.log("data: ", data, { isError, isPending });
 
   return (
     <div>
       <h1 className="text-3xl font-bold underline">Vocabulary List</h1>
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>{item.word}</li>
-        ))}
-      </ul>
+      <ul>{data?.map((item) => <li key={item.id}>{item.word}</li>)}</ul>
     </div>
   );
 };

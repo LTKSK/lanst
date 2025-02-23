@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addVocablary } from "./api";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const VocabularyForm = () => {
   const [word, setWord] = useState("");
@@ -13,9 +14,21 @@ export const VocabularyForm = () => {
   ) => {
     setDefinition(event.target.value);
   };
+
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: addVocablary,
+    onSuccess: () => {
+      setWord("");
+      setDefinition("");
+      console.log("Created");
+      queryClient.invalidateQueries({ queryKey: ["vocablaries"] });
+      // queryClient.refetchQueries({ queryKey: ["vocablaries"] });
+    },
+  });
   const handleCreate = (event: React.FormEvent) => {
     event.preventDefault();
-    addVocablary({ word, definition });
+    mutation.mutate({ word, definition });
   };
 
   return (
@@ -31,6 +44,7 @@ export const VocabularyForm = () => {
           type="text"
           id="word"
           name="word"
+          value={word}
           className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
           onChange={handleWordChange}
         />
@@ -46,6 +60,7 @@ export const VocabularyForm = () => {
           id="definition"
           name="definition"
           className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500"
+          value={definition}
           onChange={handleDefinitionChange}
         />
       </div>

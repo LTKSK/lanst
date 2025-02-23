@@ -4,7 +4,7 @@ export type Vocabulary = {
   definition: string;
 };
 
-const vocablaries: Vocabulary[] = [
+let vocablaries: Vocabulary[] = [
   {
     id: 1,
     word: "bibliothek",
@@ -23,22 +23,26 @@ const vocablaries: Vocabulary[] = [
 ];
 
 export async function fetchVocablaries(): Promise<Vocabulary[]> {
+  console.log("Fetching vocablaries", vocablaries);
   return new Promise((resolve, reject) =>
     setTimeout(() => {
-      if (Math.random() < 0.3) {
-        reject(new Error("Failed to fetch vocablaries"));
-        return;
-      }
+      // if (Math.random() < 0.3) {
+      //   reject(new Error("Failed to fetch vocablaries"));
+      //   return;
+      // }
       resolve(vocablaries);
-    }, 2000)
+    }, 1000)
   );
 }
 
 export async function addVocablary(
   vocablary: Omit<Vocabulary, "id">
 ): Promise<void> {
-  vocablaries.push({
-    id: vocablaries.length + 1,
-    ...vocablary,
-  });
+  vocablaries = [
+    ...vocablaries,
+    {
+      id: vocablaries.length + 1,
+      ...vocablary,
+    },
+  ];
 }
