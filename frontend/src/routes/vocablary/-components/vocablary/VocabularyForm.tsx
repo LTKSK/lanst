@@ -21,9 +21,7 @@ export const VocabularyForm = () => {
     onSuccess: () => {
       setWord("");
       setDefinition("");
-      console.log("Created");
       queryClient.invalidateQueries({ queryKey: ["vocablaries"] });
-      // queryClient.refetchQueries({ queryKey: ["vocablaries"] });
     },
   });
   const handleCreate = (event: React.FormEvent) => {
